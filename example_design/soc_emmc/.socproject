@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<propelProject>
+    <builder-resource>
+        <socProject sbxfile="./soc_emmc/soc_emmc.sbx" />
+        <verifyProject sbxfile="./verification/soc_emmc_v.sbx" />
+    </builder-resource>
+    <builderInfo version="2025.1.0.2506031608" />
+</propelProject>

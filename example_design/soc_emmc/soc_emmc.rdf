@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RadiantProject version="4.2" radiant="2026.1.t.14.0" title="soc_emmc" device="LFMXO5-100T-7BBG400I" performance_grade="7_High-Performance_1.0V" family_int="jd5f00" device_int="jd5g80" package_int="BBG400" operation_int="IND" speed_int="10" default_implementation="impl_1">
+    <Options/>
+    <Implementation title="impl_1" dir="impl_1" description="impl_1" synthesis="synplify" default_strategy="Strategy1">
+        <Options def_top="soc_emmc">
+            <Option name="include path" value="."/>
+            <Option name="top" value="soc_emmc"/>
+        </Options>
+        <Source name="soc_emmc/lib/latticesemi.com/ip/sysmem0/2.4.0/sysmem0.ipx" type="IPX_Module" type_short="IPX">
+            <Options/>
+        </Source>
+        <Source name="soc_emmc/lib/latticesemi.com/ip/cpu0/2.4.0/cpu0.ipx" type="IPX_Module" type_short="IPX">
+            <Options/>
+        </Source>
+        <Source name="soc_emmc/soc_emmc.v" type="Verilog" type_short="Verilog">
+            <Options top_module="soc_emmc"/>
+        </Source>
+        <Source name="soc_emmc/lib/latticesemi.com/module/apb_int0/1.2.1/apb_int0.ipx" type="IPX_Module" type_short="IPX">
+            <Options/>
+        </Source>
+        <Source name="soc_emmc/lib/latticesemi.com/ip/tcm0/1.5.2/tcm0.ipx" type="IPX_Module" type_short="IPX">
+            <Options/>
+        </Source>
+        <Source name="soc_emmc/lib/latticesemi.com/module/pll0/1.9.1/pll0.ipx" type="IPX_Module" type_short="IPX">
+            <Options/>
+        </Source>
+        <Source name="soc_emmc/lib/latticesemi.com/ip/emmc0/1.0.0/emmc0.ipx" type="IPX_Module" type_short="IPX">
+            <Options/>
+        </Source>
+        <Source name="soc_emmc/lib/latticesemi.com/module/osc0/1.4.0/osc0.ipx" type="IPX_Module" type_short="IPX">
+            <Options/>
+        </Source>
+        <Source name="soc_emmc/lib/latticesemi.com/ip/uart0/1.3.0/uart0.ipx" type="IPX_Module" type_short="IPX">
+            <Options/>
+        </Source>
+        <Source name="soc_emmc/lib/latticesemi.com/ip/axi2apb0/1.3.0/axi2apb0.ipx" type="IPX_Module" type_short="IPX">
+            <Options/>
+        </Source>
+        <Source name="soc_emmc/lib/latticesemi.com/ip/axi4_bus0/2.1.0/axi4_bus0.ipx" type="IPX_Module" type_short="IPX">
+            <Options/>
+        </Source>
+        <Source name="constraint/soc_emmc_constraint.pdc" type="Physical Constraints File" type_short="PDC">
+            <Options/>
+        </Source>
+    </Implementation>
+    <Strategy name="Strategy1" file="soc_emmc1.sty"/>
+</RadiantProject>

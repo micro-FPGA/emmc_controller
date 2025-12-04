@@ -1,0 +1,236 @@
+<?xml version="1.0" ?>
+<lsccip:settings xmlns:lsccip="http://www.latticesemi.com/XMLSchema/Radiant/ip">
+
+
+    <lsccip:setting id                 = "hide_debug_rtl_params"
+                    type               = "input"
+                    conn_mod           = "lscc_emmc_controller"
+                    value_type         = "int"
+                    default            = "0"
+                    editable           = "False"
+                    hidden             = "True"
+                    group1             = "eMMC Controller Parameters"
+                    group2             = "DEBUG: IP Parameters"
+    />
+
+    <lsccip:setting id                 = "DEVICE_FAMILY"
+                    type               = "param"
+                    conn_mod           = "lscc_emmc_controller"
+                    value_type         = "string"
+                    value_expr         = "runtime_info.device_info.architecture(1)"
+                    editable           = "False"
+                    hidden             = "bool(hide_debug_rtl_params)"
+                    group1             = "eMMC Controller Parameters"
+                    group2             = "DEBUG: IP Parameters"
+    />
+
+    <lsccip:setting id                 = "AXI4_TID_WIDTH"
+                    type               = "param"
+                    conn_mod           = "lscc_emmc_controller"
+                    value_type         = "int"
+                    value_expr         = "gui_axi_id_width"
+                    editable           = "False"
+                    hidden             = "bool(hide_debug_rtl_params)"
+                    group1             = "eMMC Controller Parameters"
+                    group2             = "DEBUG: IP Parameters"
+    />
+
+    <!--Capabilities-->
+    <lsccip:setting id                 = "EN_DDR_MODE"
+                    type               = "param"
+                    conn_mod           = "lscc_emmc_controller"
+                    value_type         = "int"
+                    value_expr         = "int(gui_en_ddr)"
+                    editable           = "False"
+                    hidden             = "bool(hide_debug_rtl_params)"
+                    group1             = "eMMC Controller Parameters"
+                    group2             = "DEBUG: IP Parameters"
+    />
+
+    <lsccip:setting id                 = "MAX_NUMLANE"
+                    type               = "param"
+                    conn_mod           = "lscc_emmc_controller"
+                    value_type         = "int"
+                    value_expr         = "gui_max_num_lane"
+                    editable           = "False"
+                    hidden             = "bool(hide_debug_rtl_params)"
+                    group1             = "eMMC Controller Parameters"
+                    group2             = "DEBUG: IP Parameters"
+    />
+
+    <lsccip:setting id                 = "DEF_BLOCK_SIZE"
+                    type               = "param"
+                    conn_mod           = "lscc_emmc_controller"
+                    value_type         = "int"
+                    value_expr         = "gui_def_blk_size"
+                    editable           = "False"
+                    hidden             = "bool(hide_debug_rtl_params)"
+                    group1             = "eMMC Controller Parameters"
+                    group2             = "DEBUG: IP Parameters"
+    />
+
+    <lsccip:setting id                 = "MIN_BLOCK_SIZE"
+                    type               = "param"
+                    conn_mod           = "lscc_emmc_controller"
+                    value_type         = "int"
+                    value_expr         = "gui_min_blk_size"
+                    editable           = "False"
+                    hidden             = "bool(hide_debug_rtl_params)"
+                    group1             = "eMMC Controller Parameters"
+                    group2             = "DEBUG: IP Parameters"
+    />
+
+    <lsccip:setting id                 = "MAX_BLOCK_SIZE"
+                    type               = "param"
+                    conn_mod           = "lscc_emmc_controller"
+                    value_type         = "int"
+                    value_expr         = "gui_max_blk_size"
+                    editable           = "False"
+                    hidden             = "bool(hide_debug_rtl_params)"
+                    group1             = "eMMC Controller Parameters"
+                    group2             = "DEBUG: IP Parameters"
+    />
+
+    <lsccip:setting id                 = "MAX_NUM_BLOCK"
+                    type               = "param"
+                    conn_mod           = "lscc_emmc_controller"
+                    value_type         = "int"
+                    value_expr         = "gui_max_num_blk+1"
+                    editable           = "False"
+                    hidden             = "bool(hide_debug_rtl_params)"
+                    group1             = "eMMC Controller Parameters"
+                    group2             = "DEBUG: IP Parameters"
+    />
+
+
+    <!--User Interface-->
+    <lsccip:setting id                 = "CSR_INTERFACE"
+                    type               = "param"
+                    conn_mod           = "lscc_emmc_controller"
+                    value_type         = "string"
+                    value_expr         = "gui_csr_interface"
+                    editable           = "False"
+                    hidden             = "bool(hide_debug_rtl_params)"
+                    group1             = "eMMC Controller Parameters"
+                    group2             = "DEBUG: IP Parameters"
+    />
+
+    <lsccip:setting id                 = "DATA_INTERFACE"
+                    type               = "param"
+                    conn_mod           = "lscc_emmc_controller"
+                    value_type         = "string"
+                    value_expr         = "gui_dat_interface"
+                    editable           = "False"
+                    hidden             = "bool(hide_debug_rtl_params)"
+                    group1             = "eMMC Controller Parameters"
+                    group2             = "DEBUG: IP Parameters"
+    />
+
+
+    <lsccip:setting id                 = "EN_FULLADDR_DECODE"
+                    type               = "param"
+                    conn_mod           = "lscc_emmc_controller"
+                    value_type         = "int"
+                    value_expr         = "int(gui_en_fulladdr_decode)"
+                    editable           = "False"
+                    hidden             = "bool(hide_debug_rtl_params)"
+                    group1             = "eMMC Controller Parameters"
+                    group2             = "DEBUG: IP Parameters"
+    />
+
+    <lsccip:setting id                 = "REG_BASE_ADDR"
+                    type               = "param"
+                    conn_mod           = "lscc_emmc_controller"
+                    value_type         = "string"
+                    value_expr         = "'32\'h'+gui_regblock_baddr.rjust(8,'0')"
+                    output_formatter   = "nostr"
+                    editable           = "False"
+                    hidden             = "bool(hide_debug_rtl_params)"
+                    group1             = "eMMC Controller Parameters"
+                    group2             = "DEBUG: IP Parameters"
+    />
+
+    <lsccip:setting id                 = "FIFO_DEPTH"
+                    type               = "param"
+                    conn_mod           = "lscc_emmc_controller"
+                    value_type         = "int"
+                    value_expr         = "int(gui_fifo_depth)"
+                    editable           = "False"
+                    hidden             = "bool(hide_debug_rtl_params)"
+                    group1             = "eMMC Controller Parameters"
+                    group2             = "DEBUG: IP Parameters"
+    />
+
+    <lsccip:setting id                 = "MEM_IMPL"
+                    type               = "param"
+                    conn_mod           = "lscc_emmc_controller"
+                    value_type         = "string"
+                    value_expr         = "get_mem_impl(gui_fifo_impl)"
+                    editable           = "False"
+                    hidden             = "bool(hide_debug_rtl_params)"
+                    group1             = "eMMC Controller Parameters"
+                    group2             = "DEBUG: IP Parameters"
+    />
+
+    <!--Clock Configuration-->
+    <lsccip:setting id                 = "CLKI_FREQ"
+                    type               = "param"
+                    conn_mod           = "lscc_emmc_controller"
+                    value_type         = "float"
+                    value_expr         = "gui_sysclk_freq"
+                    editable           = "False"
+                    hidden             = "bool(hide_debug_rtl_params)"
+                    group1             = "eMMC Controller Parameters"
+                    group2             = "DEBUG: IP Parameters"
+    />
+
+    <lsccip:setting id                 = "CLKDIV_WID"
+                    type               = "param"
+                    conn_mod           = "lscc_emmc_controller"
+                    value_type         = "int"
+                    value_expr         = "calc_cntr_bitwidth(get_clkdiv_range(gui_coreclk_freq,gui_en_ddr,gui_min_emmc_freq,gui_emmc_max_speed)[1])"
+                    editable           = "False"
+                    hidden             = "bool(hide_debug_rtl_params)"
+                    group1             = "eMMC Controller Parameters"
+                    group2             = "DEBUG: IP Parameters"
+    />
+
+    <lsccip:setting id                 = "SPI_SCKDIV"
+                    type               = "param"
+                    conn_mod           = "lscc_emmc_controller"
+                    value_type         = "int"
+                    value_expr         = "gui_emmc_clk_pulsewidth"
+                    editable           = "False"
+                    hidden             = "bool(hide_debug_rtl_params)"
+                    group1             = "eMMC Controller Parameters"
+                    group2             = "DEBUG: IP Parameters"
+    />
+
+    <lsccip:setting id                 = "USE_CLKDIV1"
+                    type               = "param"
+                    conn_mod           = "lscc_emmc_controller"
+                    value_type         = "int"
+                    value_expr         = "1 if(get_clkdiv_range(gui_coreclk_freq,gui_en_ddr,gui_min_emmc_freq,gui_emmc_max_speed)[0] == 0) else 0"
+                    editable           = "False"
+                    hidden             = "bool(hide_debug_rtl_params)"
+                    group1             = "eMMC Controller Parameters"
+                    group2             = "DEBUG: IP Parameters"
+    />
+
+
+    <!--IO Primitive-->
+    <lsccip:setting id                 = "USE_IO_PRIMITIVE"
+                    type               = "param"
+                    conn_mod           = "lscc_emmc_controller"
+                    value_type         = "int"
+                    value_expr         = "int(gui_en_io_prim)"
+                    editable           = "False"
+                    hidden             = "bool(hide_debug_rtl_params)"
+                    group1             = "eMMC Controller Parameters"
+                    group2             = "DEBUG: IP Parameters"
+    />
+
+
+
+
+</lsccip:settings>

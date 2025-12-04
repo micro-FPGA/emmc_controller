@@ -1,0 +1,326 @@
+<?xml version="1.0"?>
+<lsccip:settings xmlns:lsccip="http://www.latticesemi.com/XMLSchema/Radiant/ip"
+                 xmlns:xi="http://www.w3.org/2001/XInclude">
+
+
+    <!--Main Configuration-->
+    <lsccip:setting id               = "DUT_INST_NAME"
+                    type             = "verilog_macro"
+                    conn_mod         = "lscc_emmc_controller"
+                    value_type       = "path"
+                    value_expr       = "get_dut_name()"
+                    editable         = "bool(0)"
+                    hidden           = "bool(1)"
+                    group1           = "General"
+    />
+
+    <!--User Interface-->
+    <lsccip:setting id               = "gui_csr_interface"
+                    type             = "input"
+                    conn_mod         = "lscc_emmc_controller"
+                    value_type       = "string"
+                    title            = "CSR Interface (Target)"
+                    description      = "This is the main user interface to configure and control the IP registers."
+                    options          = "['APB']"
+                    default          = "APB"
+                    editable         = "False"
+                    hidden           = "False"
+                    group2           = "General"
+                    group1           = "User Interface"
+    />
+
+    <lsccip:setting id               = "gui_apb_map_size"
+                    type             = "input"
+                    conn_mod         = "lscc_octal_spi_controller"
+                    value_type       = "int"
+                    value_expr       = "1024"
+                    editable         = "False"
+                    hidden           = "True"
+                    group2           = "General"
+                    group1           = "User Interface"
+    />
+
+    <lsccip:setting id               = "gui_en_fulladdr_decode"
+                    type             = "input"
+                    conn_mod         = "lscc_emmc_controller"
+                    value_type       = "bool"
+                    title            = "Enable Full CSR Address Decoding"
+                    description      = "If enabled, the register address will be decoded using the full 32b address.
+                                        If disabled, only the lower 10b of the address will be decoded.
+                                        Disabling the full decode means that the bus controller will ensure the correct routing of requests to individual targets."
+                    default          = "False"
+                    editable         = "True"
+                    hidden           = "False"
+                    group2           = "General"
+                    group1           = "User Interface"
+    />
+
+    <lsccip:setting id               = "gui_regblock_baddr"
+                    type             = "input"
+                    conn_mod         = "lscc_emmc_controller"
+                    value_type       = "string"
+                    title            = "Register Map: APB Base Address (32b Hex)"
+                    default          = "00000000"
+                    editable         = "gui_en_fulladdr_decode"
+                    hidden           = "False"
+                    drc              = "addr_range_drc(gui_regblock_baddr,8,1)"
+                    group2           = "General"
+                    group1           = "User Interface"
+    />
+
+    <lsccip:setting id               = "gui_dat_interface"
+                    type             = "input"
+                    conn_mod         = "lscc_emmc_controller"
+                    value_type       = "string"
+                    title            = "Data Interface (Controller)"
+                    description      = "This interface is used by the IP to move the data from eMMC device to system memory and/or the opposite direction."
+                    options          = "['AXI4','AHBL']"
+                    default          = "AXI4"
+                    editable         = "True"
+                    hidden           = "False"
+                    group2           = "General"
+                    group1           = "User Interface"
+    />
+
+    <lsccip:setting id               = "gui_axi_id_width"
+                    type             = "input"
+                    conn_mod         = "lscc_emmc_controller"
+                    value_type       = "int"
+                    value_range      = "(1,12)"
+                    title            = "AXI4 Bus ID Width"
+                    default          = "1"
+                    editable         = "(gui_dat_interface[0:4] == 'AXI4')"
+                    hidden           = "(gui_dat_interface[0:4] != 'AXI4')"
+                    group2           = "General"
+                    group1           = "User Interface"
+    />
+
+    <lsccip:setting id               = "gui_fifo_depth"
+                    type             = "input"
+                    conn_mod         = "lscc_emmc_controller"
+                    value_type       = "int"
+                    options          = "gen_fifo_depth(gui_max_blk_size)"
+                    title            = "FIFO depth"
+                    value_expr       = "int(gen_fifo_depth(gui_max_blk_size)[0])"
+                    editable         = "True"
+                    hidden           = "False"
+                    group2           = "General"
+                    group1           = "User Interface"
+    />
+
+    <lsccip:setting id               = "gui_fifo_impl"
+                    type             = "input"
+                    conn_mod         = "lscc_emmc_controller"
+                    value_type       = "int"
+                    options          = "get_mem_opts(DEVICE_FAMILY)"
+                    title            = "FIFO Implementation"
+                    default          = "2"
+                    editable         = "True"
+                    hidden           = "False"
+                    group2           = "General"
+                    group1           = "User Interface"
+    />
+
+    <!-- eMMC Capabilities -->
+    <lsccip:setting id               = "gui_en_ddr"
+                    type             = "input"
+                    conn_mod         = "lscc_emmc_controller"
+                    value_type       = "bool"
+                    title            = "Enable Double Transfer Rate"
+                    value_expr       = "False"
+                    editable         = "False"
+                    hidden           = "False"
+                    group2           = "General"
+                    group1           = "Capabilities"
+    />
+
+    <lsccip:setting id               = "gui_max_num_lane"
+                    type             = "input"
+                    conn_mod         = "lscc_emmc_controller"
+                    value_type       = "int"
+                    options          = "get_max_numlane_opts()"
+                    title            = "Max number of data lanes"
+                    value_expr       = "get_max_numlane_opts()[-1][1]"
+                    editable         = "True"
+                    hidden           = "False"
+                    group2           = "General"
+                    group1           = "Capabilities"
+    />
+
+    <lsccip:setting id               = "gui_min_blk_size"
+                    type             = "input"
+                    conn_mod         = "lscc_emmc_controller"
+                    value_type       = "int"
+                    options          = "gen_list_block_size()"
+                    title            = "Minimum block size supported (Bytes)"
+                    value_expr       = "512"
+                    editable         = "True"
+                    hidden           = "False"
+                    group2           = "General"
+                    group1           = "Capabilities"
+    />
+
+    <lsccip:setting id               = "gui_max_blk_size"
+                    type             = "input"
+                    conn_mod         = "lscc_emmc_controller"
+                    value_type       = "int"
+                    options          = "gen_list_block_size(9)"
+                    title            = "Maximum block size supported (Bytes)"
+                    value_expr       = "1024"
+                    editable         = "True"
+                    hidden           = "False"
+                    group2           = "General"
+                    group1           = "Capabilities"
+    />
+
+    <lsccip:setting id               = "gui_def_blk_size"
+                    type             = "input"
+                    conn_mod         = "lscc_emmc_controller"
+                    value_type       = "int"
+                    value_range      = "(gui_min_blk_size, gui_max_blk_size)"
+                    title            = "Default block size (Bytes)"
+                    value_expr       = "512 if(gui_min_blk_size &lt; 512) else gui_min_blk_size"
+                    editable         = "False"
+                    hidden           = "False"
+                    group2           = "General"
+                    group1           = "Capabilities"
+    />
+
+    <lsccip:setting id               = "gui_max_num_blk"
+                    type             = "input"
+                    conn_mod         = "lscc_emmc_controller"
+                    value_type       = "int"
+                    options          = "[(2**num_blk)-1 for num_blk in range(2,17)]"
+                    title            = "Maximum number of blocks in single transfer"
+                    description      = "This value affects the width of the programmable register setting."
+                    value_expr       = "31"
+                    editable         = "True"
+                    hidden           = "False"
+                    group2           = "General"
+                    group1           = "Capabilities"
+    />
+
+    <!--eMMC Max Speed: 26, 52, 104, 200, 400 -->
+    <lsccip:setting id               = "gui_emmc_max_speed"
+                    type             = "input"
+                    conn_mod         = "lscc_emmc_controller"
+                    value_type       = "int"
+                    value_range      = "(1,52)"
+                    title            = "eMMC Maximum speed (MBps)"
+                    description      = "This value affects the range of system clock frequency."
+                    value_expr       = "52"
+                    editable         = "True"
+                    hidden           = "False"
+                    group2           = "General"
+                    group1           = "Capabilities"
+    />
+
+    <!--Clock Configuration-->
+    <lsccip:setting id               = "gui_sysclk_freq"
+                    type             = "input"
+                    conn_mod         = "lscc_emmc_controller"
+                    value_type       = "float"
+                    value_range      = "get_sysclk_range(gui_emmc_max_speed)"
+                    title            = "System Clock Frequency (MHz)"
+                    default          = "100.0"
+                    editable         = "True"
+                    hidden           = "False"
+                    group2           = "General"
+                    group1           = "Clock Configuration"
+    />
+
+    <lsccip:setting id               = "gui_coreclk_freq"
+                    type             = "input"
+                    conn_mod         = "lscc_emmc_controller"
+                    value_type       = "float"
+                    title            = "Internal Clock Frequency (MHz)"
+                    value_expr       = "gui_sysclk_freq"
+                    editable         = "False"
+                    hidden           = "False"
+                    group2           = "General"
+                    group1           = "Clock Configuration"
+    />
+
+    <lsccip:setting id               = "gui_min_emmc_freq"
+                    type             = "input"
+                    conn_mod         = "lscc_emmc_controller"
+                    value_type       = "float"
+                    title            = "Minimum eMMC Clock Frequency (KHz)"
+                    description      = "This value affects the width of the internal clock divider."
+                    value_range      = "(10, 400)"
+                    default          = "400"
+                    editable         = "True"
+                    hidden           = "False"
+                    group2           = "General"
+                    group1           = "Clock Configuration"
+    />
+
+    <lsccip:setting id               = "gui_emmc_clk_pulsewidth"
+                    type             = "input"
+                    conn_mod         = "lscc_emmc_controller"
+                    value_type       = "int"
+                    value_range      = "get_clkdiv_range(gui_coreclk_freq,gui_en_ddr,gui_min_emmc_freq,gui_emmc_max_speed)"
+                    title            = "Default eMMC Clock Pulse width"
+                    value_expr       = "calc_default_clkdiv(gui_coreclk_freq,gui_min_emmc_freq)"
+                    editable         = "True"
+                    hidden           = "False"
+                    group2           = "General"
+                    group1           = "Clock Configuration"
+    />
+
+    <lsccip:setting id               = "gui_def_emmc_freq"
+                    type             = "input"
+                    conn_mod         = "lscc_emmc_controller"
+                    value_type       = "float"
+                    title            = "Default eMMC Clock Frequency (MHz)"
+                    value_expr       = "gui_coreclk_freq/(2*gui_emmc_clk_pulsewidth) if(gui_emmc_clk_pulsewidth != 0) else gui_coreclk_freq"
+                    editable         = "False"
+                    hidden           = "False"
+                    group2           = "General"
+                    group1           = "Clock Configuration"
+    />
+
+    <lsccip:setting id               = "gui_emmc_clk_period"
+                    type             = "input"
+                    conn_mod         = "lscc_emmc_controller"
+                    value_type       = "float"
+                    title            = "Default eMMC Clock Period (ns)"
+                    value_expr       = "1000/gui_def_emmc_freq"
+                    editable         = "False"
+                    hidden           = "False"
+                    group2           = "General"
+                    group1           = "Clock Configuration"
+    />
+
+
+    <!--IO Primitive-->
+    <lsccip:setting id               = "gui_en_io_prim"
+                    type             = "input"
+                    conn_mod         = "lscc_emmc_controller"
+                    value_type       = "bool"
+                    title            = "Include IO Primitive"
+                    default          = "True"
+                    editable         = "True"
+                    hidden           = "False"
+                    group2           = "General"
+                    group1           = "IO Primitive"
+    />
+
+
+    <!--For Simulation-->
+    <lsccip:setting id               = "TB_MEM_INTF"
+                    type             = "verilog_macro"
+                    conn_mod         = "lscc_emmc_controller"
+                    value_type       = "string"
+                    value_expr       = "'axi' if(DATA_INTERFACE == 'AXI4') else 'ahbl'"
+                    editable         = "bool(0)"
+                    hidden           = "bool(1)"
+                    group1           = "General"
+    />
+
+    <!-- RTL Parameters -->
+    <xi:include href="rtl_params.xml" parse="xml" xpointer="xmlns(lsccip=http://www.latticesemi.com/XMLSchema/Radiant/ip)xpointer(//lsccip:setting)" />
+
+
+</lsccip:settings>
+

@@ -1,0 +1,556 @@
+<?xml version="1.0" ?>
+<lsccip:ports xmlns:lsccip="http://www.latticesemi.com/XMLSchema/Radiant/ip">
+
+    <lsccip:port name          = "rst_n_i"
+                 dir           = "in"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "rst_n_i"
+    />
+
+    <lsccip:port name          = "clk_i"
+                 dir           = "in"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "clk_i"
+    />
+
+    <!--SPI interface-->
+    <lsccip:port name          = "emmc_clk_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "emmc_clk_o"
+    />
+
+    <lsccip:port name          = "emmc_dat_ds_i"
+                 dir           = "in"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "emmc_dat_ds_i"
+                 stick_low     = "not EN_DDR_MODE"
+    />
+
+    <lsccip:port name          = "emmc_cmd_io"
+                 dir           = "inout"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "emmc_cmd_io"
+                 dangling      = "not (USE_IO_PRIMITIVE)"
+    />
+
+    <lsccip:port name          = "emmc_cmd_i"
+                 dir           = "in"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "emmc_cmd_i"
+                 stick_low     = "USE_IO_PRIMITIVE"
+    />
+
+    <lsccip:port name          = "emmc_cmd_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "emmc_cmd_o"
+                 dangling      = "USE_IO_PRIMITIVE"
+    />
+
+    <lsccip:port name          = "emmc_cmd_oe_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "emmc_cmd_oe_o"
+                 dangling      = "USE_IO_PRIMITIVE"
+    />
+
+    <lsccip:port name          = "emmc_dat_io"
+                 dir           = "inout"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "emmc_dat_io"
+                 dangling      = "not (USE_IO_PRIMITIVE)"
+                 range         = "(MAX_NUMLANE-1, 0)"
+    />
+
+    <lsccip:port name          = "emmc_dat_i"
+                 dir           = "in"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "emmc_dat_i"
+                 stick_low     = "USE_IO_PRIMITIVE"
+                 range         = "(MAX_NUMLANE-1, 0)"
+    />
+
+    <lsccip:port name          = "emmc_dat_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "emmc_dat_o"
+                 dangling      = "USE_IO_PRIMITIVE"
+                 range         = "(MAX_NUMLANE-1, 0)"
+    />
+
+    <lsccip:port name          = "emmc_dat_oe_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "emmc_dat_oe_o"
+                 dangling      = "USE_IO_PRIMITIVE"
+                 range         = "(MAX_NUMLANE-1, 0)"
+    />
+
+    <lsccip:port name          = "emmc_rst_n_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "emmc_rst_n_o"
+    />
+
+
+    <!-- Interrupt output -->
+    <lsccip:port name          = "int_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "int_o"
+                 bus_interface = "INTR"
+    />
+
+    <!--AXI4 Bus for Data and CSR -->
+    <!--AXI4 Write Address Channel-->
+    <lsccip:port name          = "m_axi4_awready_i"
+                 dir           = "in"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_axi4_awready_i"
+                 stick_high    = "DATA_INTERFACE[0:4] != 'AXI4'"
+                 bus_interface = "AXI4_M0"
+    />
+
+    <lsccip:port name          = "m_axi4_awvalid_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_axi4_awvalid_o"
+                 dangling      = "DATA_INTERFACE[0:4] != 'AXI4'"
+                 bus_interface = "AXI4_M0"
+    />
+
+    <lsccip:port name          = "m_axi4_awid_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_axi4_awid_o"
+                 range         = "(AXI4_TID_WIDTH-1, 0)"
+                 dangling      = "DATA_INTERFACE[0:4] != 'AXI4'"
+                 bus_interface = "AXI4_M0"
+    />
+
+    <lsccip:port name          = "m_axi4_awaddr_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_axi4_awaddr_o"
+                 range         = "(31, 0)"
+                 dangling      = "DATA_INTERFACE[0:4] != 'AXI4'"
+                 bus_interface = "AXI4_M0"
+    />
+
+    <lsccip:port name          = "m_axi4_awlen_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_axi4_awlen_o"
+                 range         = "(7, 0)"
+                 dangling      = "DATA_INTERFACE[0:4] != 'AXI4'"
+                 bus_interface = "AXI4_M0"
+    />
+
+    <lsccip:port name          = "m_axi4_awsize_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_axi4_awsize_o"
+                 range         = "(2, 0)"
+                 dangling      = "DATA_INTERFACE[0:4] != 'AXI4'"
+                 bus_interface = "AXI4_M0"
+    />
+
+    <lsccip:port name          = "m_axi4_awburst_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_axi4_awburst_o"
+                 range         = "(1, 0)"
+                 dangling      = "DATA_INTERFACE[0:4] != 'AXI4'"
+                 bus_interface = "AXI4_M0"
+    />
+
+    <lsccip:port name          = "m_axi4_awprot_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_axi4_awprot_o"
+                 range         = "(2, 0)"
+                 dangling      = "DATA_INTERFACE[0:4] != 'AXI4'"
+                 bus_interface = "AXI4_M0"
+    />
+
+    <!--AXI4 Write Data Channel-->
+    <lsccip:port name          = "m_axi4_wready_i"
+                 dir           = "in"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_axi4_wready_i"
+                 stick_high    = "DATA_INTERFACE[0:4] != 'AXI4'"
+                 bus_interface = "AXI4_M0"
+    />
+
+    <lsccip:port name          = "m_axi4_wvalid_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_axi4_wvalid_o"
+                 dangling      = "DATA_INTERFACE[0:4] != 'AXI4'"
+                 bus_interface = "AXI4_M0"
+    />
+
+    <lsccip:port name          = "m_axi4_wdata_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_axi4_wdata_o"
+                 range         = "(31, 0)"
+                 dangling      = "DATA_INTERFACE[0:4] != 'AXI4'"
+                 bus_interface = "AXI4_M0"
+    />
+
+    <lsccip:port name          = "m_axi4_wstrb_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_axi4_wstrb_o"
+                 range         = "(3, 0)"
+                 dangling      = "DATA_INTERFACE[0:4] != 'AXI4'"
+                 bus_interface = "AXI4_M0"
+    />
+
+    <lsccip:port name          = "m_axi4_wlast_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_axi4_wlast_o"
+                 dangling      = "DATA_INTERFACE[0:4] != 'AXI4'"
+                 bus_interface = "AXI4_M0"
+    />
+
+    <!--AXI4 Write Response Channel-->
+    <lsccip:port name          = "m_axi4_bready_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_axi4_bready_o"
+                 dangling      = "DATA_INTERFACE[0:4] != 'AXI4'"
+                 bus_interface = "AXI4_M0"
+    />
+
+    <lsccip:port name          = "m_axi4_bvalid_i"
+                 dir           = "in"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_axi4_bvalid_i"
+                 stick_low     = "DATA_INTERFACE[0:4] != 'AXI4'"
+                 bus_interface = "AXI4_M0"
+    />
+
+    <lsccip:port name          = "m_axi4_bid_i"
+                 dir           = "in"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_axi4_bid_i"
+                 range         = "(AXI4_TID_WIDTH-1, 0)"
+                 stick_low     = "DATA_INTERFACE[0:4] != 'AXI4'"
+                 bus_interface = "AXI4_M0"
+    />
+
+    <lsccip:port name          = "m_axi4_bresp_i"
+                 dir           = "in"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_axi4_bresp_i"
+                 range         = "(1, 0)"
+                 stick_low     = "DATA_INTERFACE[0:4] != 'AXI4'"
+                 bus_interface = "AXI4_M0"
+    />
+
+    <!--AXI4 Read Address Channel-->
+    <lsccip:port name          = "m_axi4_arready_i"
+                 dir           = "in"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_axi4_arready_i"
+                 stick_high    = "DATA_INTERFACE[0:4] != 'AXI4'"
+                 bus_interface = "AXI4_M0"
+    />
+
+    <lsccip:port name          = "m_axi4_arvalid_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_axi4_arvalid_o"
+                 dangling      = "DATA_INTERFACE[0:4] != 'AXI4'"
+                 bus_interface = "AXI4_M0"
+    />
+
+    <lsccip:port name          = "m_axi4_arid_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_axi4_arid_o"
+                 range         = "(AXI4_TID_WIDTH-1, 0)"
+                 dangling      = "DATA_INTERFACE[0:4] != 'AXI4'"
+                 bus_interface = "AXI4_M0"
+    />
+
+    <lsccip:port name          = "m_axi4_araddr_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_axi4_araddr_o"
+                 range         = "(31, 0)"
+                 dangling      = "DATA_INTERFACE[0:4] != 'AXI4'"
+                 bus_interface = "AXI4_M0"
+    />
+
+    <lsccip:port name          = "m_axi4_arlen_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_axi4_arlen_o"
+                 range         = "(7, 0)"
+                 dangling      = "DATA_INTERFACE[0:4] != 'AXI4'"
+                 bus_interface = "AXI4_M0"
+    />
+
+    <lsccip:port name          = "m_axi4_arsize_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_axi4_arsize_o"
+                 range         = "(2, 0)"
+                 dangling      = "DATA_INTERFACE[0:4] != 'AXI4'"
+                 bus_interface = "AXI4_M0"
+    />
+
+    <lsccip:port name          = "m_axi4_arburst_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_axi4_arburst_o"
+                 range         = "(1, 0)"
+                 dangling      = "DATA_INTERFACE[0:4] != 'AXI4'"
+                 bus_interface = "AXI4_M0"
+    />
+
+    <lsccip:port name          = "m_axi4_arprot_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_axi4_arprot_o"
+                 range         = "(2, 0)"
+                 dangling      = "DATA_INTERFACE[0:4] != 'AXI4'"
+                 bus_interface = "AXI4_M0"
+    />
+
+    <!--AXI4 Read Data Channel-->
+    <lsccip:port name          = "m_axi4_rvalid_i"
+                 dir           = "in"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_axi4_rvalid_i"
+                 stick_low     = "DATA_INTERFACE[0:4] != 'AXI4'"
+                 bus_interface = "AXI4_M0"
+    />
+
+    <lsccip:port name          = "m_axi4_rready_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_axi4_rready_o"
+                 dangling      = "DATA_INTERFACE[0:4] != 'AXI4'"
+                 bus_interface = "AXI4_M0"
+    />
+
+    <lsccip:port name          = "m_axi4_rid_i"
+                 dir           = "in"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_axi4_rid_i"
+                 range         = "(AXI4_TID_WIDTH-1, 0)"
+                 stick_low     = "DATA_INTERFACE[0:4] != 'AXI4'"
+                 bus_interface = "AXI4_M0"
+    />
+
+    <lsccip:port name          = "m_axi4_rdata_i"
+                 dir           = "in"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_axi4_rdata_i"
+                 range         = "(31, 0)"
+                 stick_low     = "DATA_INTERFACE[0:4] != 'AXI4'"
+                 bus_interface = "AXI4_M0"
+    />
+
+    <lsccip:port name          = "m_axi4_rresp_i"
+                 dir           = "in"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_axi4_rresp_i"
+                 range         = "(1, 0)"
+                 stick_low     = "DATA_INTERFACE[0:4] != 'AXI4'"
+                 bus_interface = "AXI4_M0"
+    />
+
+    <lsccip:port name          = "m_axi4_rlast_i"
+                 dir           = "in"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_axi4_rlast_i"
+                 stick_low     = "DATA_INTERFACE[0:4] != 'AXI4'"
+                 bus_interface = "AXI4_M0"
+    />
+
+
+    <!--AHB-Lite Bus for Data -->
+    <!-- AHB-Lite Master outputs -->
+    <lsccip:port name          = "m_ahbl_hsel_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_ahbl_hsel_o"
+                 dangling      = "DATA_INTERFACE != 'AHBL'"
+                 bus_interface = "AHBL_M0"
+    />
+
+    <lsccip:port name          = "m_ahbl_haddr_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_ahbl_haddr_o"
+                 range         = "(31, 0)"
+                 dangling      = "DATA_INTERFACE != 'AHBL'"
+                 bus_interface = "AHBL_M0"
+    />
+
+    <lsccip:port name          = "m_ahbl_htrans_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_ahbl_htrans_o"
+                 range         = "(1, 0)"
+                 dangling      = "DATA_INTERFACE != 'AHBL'"
+                 bus_interface = "AHBL_M0"
+    />
+
+    <lsccip:port name          = "m_ahbl_hwrite_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_ahbl_hwrite_o"
+                 dangling      = "DATA_INTERFACE != 'AHBL'"
+                 bus_interface = "AHBL_M0"
+    />
+
+    <lsccip:port name          = "m_ahbl_hsize_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_ahbl_hsize_o"
+                 range         = "(2, 0)"
+                 dangling      = "DATA_INTERFACE != 'AHBL'"
+                 bus_interface = "AHBL_M0"
+    />
+
+    <lsccip:port name          = "m_ahbl_hburst_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_ahbl_hburst_o"
+                 range         = "(2, 0)"
+                 dangling      = "DATA_INTERFACE != 'AHBL'"
+                 bus_interface = "AHBL_M0"
+    />
+
+    <lsccip:port name          = "m_ahbl_hprot_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_ahbl_hprot_o"
+                 range         = "(3, 0)"
+                 dangling      = "DATA_INTERFACE != 'AHBL'"
+                 bus_interface = "AHBL_M0"
+    />
+
+    <lsccip:port name          = "m_ahbl_hmastlock_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_ahbl_hmastlock_o"
+                 dangling      = "DATA_INTERFACE != 'AHBL'"
+                 bus_interface = "AHBL_M0"
+    />
+
+    <lsccip:port name          = "m_ahbl_hwdata_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_ahbl_hwdata_o"
+                 range         = "(31, 0)"
+                 dangling      = "DATA_INTERFACE != 'AHBL'"
+                 bus_interface = "AHBL_M0"
+    />
+
+    <!-- AHB-Lite Master inputs -->
+    <lsccip:port name          = "m_ahbl_hready_i"
+                 dir           = "in"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_ahbl_hready_i"
+                 stick_high    = "DATA_INTERFACE != 'AHBL'"
+                 bus_interface = "AHBL_M0"
+    />
+
+    <lsccip:port name          = "m_ahbl_hresp_i"
+                 dir           = "in"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_ahbl_hresp_i"
+                 stick_low     = "DATA_INTERFACE != 'AHBL'"
+                 bus_interface = "AHBL_M0"
+    />
+
+    <lsccip:port name          = "m_ahbl_hrdata_i"
+                 dir           = "in"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "m_ahbl_hrdata_i"
+                 range         = "(31, 0)"
+                 stick_low     = "DATA_INTERFACE != 'AHBL'"
+                 bus_interface = "AHBL_M0"
+    />
+
+
+    <!--APB Bus for Data and CSR -->
+    <!-- APB inputs -->
+    <lsccip:port name          = "s_apb_penable_i"
+                 dir           = "in"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "s_apb_penable_i"
+                 stick_low     = "(CSR_INTERFACE != 'APB')"
+                 bus_interface = "APB_S0"
+    />
+
+    <lsccip:port name          = "s_apb_psel_i"
+                 dir           = "in"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "s_apb_psel_i"
+                 stick_low     = "(CSR_INTERFACE != 'APB')"
+                 bus_interface = "APB_S0"
+    />
+
+    <lsccip:port name          = "s_apb_pwrite_i"
+                 dir           = "in"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "s_apb_pwrite_i"
+                 stick_low     = "(CSR_INTERFACE != 'APB')"
+                 bus_interface = "APB_S0"
+    />
+
+    <lsccip:port name          = "s_apb_paddr_i"
+                 dir           = "in"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "s_apb_paddr_i"
+                 range         = "(31, 0)"
+                 stick_low     = "(CSR_INTERFACE != 'APB')"
+                 bus_interface = "APB_S0"
+    />
+
+    <lsccip:port name          = "s_apb_pwdata_i"
+                 dir           = "in"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "s_apb_pwdata_i"
+                 range         = "(31, 0)"
+                 stick_low     = "(CSR_INTERFACE != 'APB')"
+                 bus_interface = "APB_S0"
+    />
+
+    <!-- APB outputs -->
+    <lsccip:port name          = "s_apb_pready_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "s_apb_pready_o"
+                 dangling      = "(CSR_INTERFACE != 'APB')"
+                 bus_interface = "APB_S0"
+    />
+
+    <lsccip:port name          = "s_apb_pslverr_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "s_apb_pslverr_o"
+                 dangling      = "(CSR_INTERFACE != 'APB')"
+                 bus_interface = "APB_S0"
+    />
+
+    <lsccip:port name          = "s_apb_prdata_o"
+                 dir           = "out"
+                 conn_mod      = "lscc_emmc_controller"
+                 conn_port     = "s_apb_prdata_o"
+                 range         = "(31, 0)"
+                 dangling      = "(CSR_INTERFACE != 'APB')"
+                 bus_interface = "APB_S0"
+    />
+
+</lsccip:ports>

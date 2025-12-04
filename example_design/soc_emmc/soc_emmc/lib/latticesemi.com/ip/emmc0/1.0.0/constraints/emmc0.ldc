@@ -1,0 +1,34 @@
+set device "LFMXO5-100T"
+set device_int "jd5g80"
+set package "BBG400"
+set package_int "BBG400"
+set speed "7_High-Performance_1.0V"
+set speed_int "10"
+set operation "Industrial"
+set family "LFMXO5"
+set architecture "jd5f00"
+set partnumber "LFMXO5-100T-7BBG400I"
+set WRAPPER_INST "lscc_emmc_controller_inst"
+set DEVICE_FAMILY "LFMXO5"
+set AXI4_TID_WIDTH 3
+set EN_DDR_MODE 0
+set MAX_NUMLANE 8
+set DEF_BLOCK_SIZE 512
+set MIN_BLOCK_SIZE 512
+set MAX_BLOCK_SIZE 1024
+set MAX_NUM_BLOCK 32
+set CSR_INTERFACE "APB"
+set DATA_INTERFACE "AXI4"
+set EN_FULLADDR_DECODE 0
+set REG_BASE_ADDR "32'h00000000"
+set FIFO_DEPTH 512
+set MEM_IMPL "HARD_IP"
+set CLKI_FREQ 50.000000
+set CLKDIV_WID 8
+set SPI_SCKDIV 250
+set USE_CLKDIV1 1
+set USE_IO_PRIMITIVE 1
+
+
+###set CLKI_PERIOD [expr (1000/$CLKI_FREQ)]
+

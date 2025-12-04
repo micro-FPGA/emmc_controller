@@ -1,0 +1,18 @@
+<lsccip:memoryMaps xmlns:lsccip="http://www.latticesemi.com/XMLSchema/Radiant/ip">
+    <lsccip:memoryMap>
+        <lsccip:name>emmc_controller_apb_map</lsccip:name>
+        <lsccip:description>eMMC Controller memory map</lsccip:description>
+            <lsccip:addressBlock>
+                <lsccip:name>EMMC_CONTROLLER_MEM</lsccip:name>
+                <lsccip:displayName>eMMC_Controller_Address</lsccip:displayName>
+                <lsccip:description>eMMC Controller Address Space</lsccip:description>
+                <lsccip:baseAddress>0</lsccip:baseAddress>
+                <lsccip:range>gui_apb_map_size</lsccip:range>
+                <lsccip:width>32</lsccip:width>
+                <lsccip:usage>memory</lsccip:usage>
+                <lsccip:access>read-write</lsccip:access>
+            </lsccip:addressBlock>
+    </lsccip:memoryMap>
+
+</lsccip:memoryMaps>
+

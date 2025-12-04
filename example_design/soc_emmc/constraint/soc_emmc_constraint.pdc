@@ -1,0 +1,35 @@
+### Sample constraint
+
+set_false_path -from [get_ports rstn_i]
+set_false_path -from [get_clocks {osc0_inst_hf_clk_out*}] -to [get_clocks {pll0_inst_clkop*}]
+set_false_path -from [get_clocks {pll0_inst_clkop*}] -to [get_clocks {osc0_inst_hf_clk_out*}]
+#set_false_path -to [get_pins {emmc0_inst/lscc_emmc_controller_inst/u_emmc_top/u_axi4_m/u_dat_fifo/*rst_n}]
+
+ldc_set_location -site {U13} [get_ports emmc_clk_o]
+ldc_set_location -site {P11} [get_ports emmc_rst_n_o]
+ldc_set_location -site {V11} [get_ports emmc_cmd_io]
+ldc_set_location -site {R13} [get_ports {emmc_dat_io[0]}]
+ldc_set_location -site {W11} [get_ports {emmc_dat_io[1]}]
+ldc_set_location -site {W13} [get_ports {emmc_dat_io[2]}]
+ldc_set_location -site {U12} [get_ports {emmc_dat_io[3]}]
+ldc_set_location -site {V12} [get_ports {emmc_dat_io[4]}]
+ldc_set_location -site {W12} [get_ports {emmc_dat_io[5]}]
+ldc_set_location -site {Y12} [get_ports {emmc_dat_io[6]}]
+ldc_set_location -site {Y13} [get_ports {emmc_dat_io[7]}]
+
+ldc_set_port -iobuf {SLEWRATE=FAST} [get_ports {emmc_clk_o}]
+ldc_set_port -iobuf {SLEWRATE=FAST} [get_ports {emmc_rst_n_o}]
+ldc_set_port -iobuf {SLEWRATE=FAST PULLMODE=NONE} [get_ports {emmc_cmd_io}]
+ldc_set_port -iobuf {SLEWRATE=FAST PULLMODE=NONE} [get_ports {emmc_dat_io[7]}]
+ldc_set_port -iobuf {SLEWRATE=FAST PULLMODE=NONE} [get_ports {emmc_dat_io[6]}]
+ldc_set_port -iobuf {SLEWRATE=FAST PULLMODE=NONE} [get_ports {emmc_dat_io[5]}]
+ldc_set_port -iobuf {SLEWRATE=FAST PULLMODE=NONE} [get_ports {emmc_dat_io[4]}]
+ldc_set_port -iobuf {SLEWRATE=FAST PULLMODE=NONE} [get_ports {emmc_dat_io[3]}]
+ldc_set_port -iobuf {SLEWRATE=FAST PULLMODE=NONE} [get_ports {emmc_dat_io[2]}]
+ldc_set_port -iobuf {SLEWRATE=FAST PULLMODE=NONE} [get_ports {emmc_dat_io[1]}]
+ldc_set_port -iobuf {SLEWRATE=FAST PULLMODE=NONE} [get_ports {emmc_dat_io[0]}]
+
+ldc_set_location -site {N3} [get_ports uart0_txd_o]
+ldc_set_location -site {N4} [get_ports uart0_rxd_i]
+
+ldc_set_location -site {D16} [get_ports rstn_i]

@@ -1,0 +1,6 @@
+<lsccip:ip xmlns:lsccip='http://www.latticesemi.com/XMLSchema/Radiant/ip'
+           xmlns:xi='http://www.w3.org/2001/XInclude' version="1.0" platform="propel" platform_version="2024.2">
+  <lsccip:outFileConfigs>
+    <lsccip:fileConfig name="tcl_constraints" stage="constraint.sdc=lse:all,synplify:all"/>
+  </lsccip:outFileConfigs>
+</lsccip:ip>
