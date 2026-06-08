@@ -152,10 +152,10 @@ unsigned char sd_card_init(emmc_ctl_handle_t *handle,
 
     /* ----------------------------------------------------------------
      * Step 5: CMD3 — SEND_RELATIVE_ADDR
-     * Unlike eMMC (host assigns RCA), SD card publishes its own RCA.
-     * RCA is returned in the upper 16 bits of the R6 response (RESP_D1).
-     * Store it shifted into position so emmc_cmd_select_card() works
-     * unchanged (it sends handle->tgt_addr directly as CTRL1).
+     * Unlike eMMC where the HOST assigns the RCA as the argument,
+     * SD cards IGNORE the argument (we send 0x0) and instead the
+     * CARD itself chooses and returns its own RCA in the R6 response.
+     * We then read that RCA back from RESP_D1 upper 16 bits.
      * ---------------------------------------------------------------- */
     ret = sd_send_cmd(handle, EMMC_CMD_SET_RELATIVE_ADDR, 0x00000000);
     if (ret != SUCCESS) return FAILURE;
