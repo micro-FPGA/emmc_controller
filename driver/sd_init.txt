@@ -1,0 +1,12 @@
+
+
+// Example how to initialize the SD Card
+
+emmc_ctl_handle_t handle;
+uint8_t is_hc = 0;
+
+emmc_ctl_init(&handle, BASE_ADDR, clk_rate, interrupts);
+if (sd_card_init(&handle, &is_hc) == SUCCESS) {
+    // is_hc = 1 means SDHC/SDXC (block addressing)
+    // is_hc = 0 means standard SD (byte addressing)
+}
